@@ -20,3 +20,31 @@ h1, h2, h3, h4, h5, h6 {
   border-width: 0;
 }
 
+
+.editor-container {
+  width: 100%;
+  background-color: #282c34;
+  color: #ffffff;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+.editor {
+  background-color: #1e1e1e;
+  color: #dcdcdc;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 14px;
+  padding: 10px;
+  border: none;
+  outline: none;
+  white-space: pre;
+  overflow: auto;
+  border-radius: 4px;
+}
+
+.editor:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}

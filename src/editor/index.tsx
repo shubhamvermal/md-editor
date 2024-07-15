@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import "../assets/index.css";
 import EditorContext from './context'
 import { Options } from './options';
 import { Editor } from './editor';
@@ -64,7 +65,6 @@ MyEditor.Previewer = Previewer;
 // }
 // function parser(str){
 //     const itemList = separator(str)
-//     console.log(itemList)
 // }
 
 // const str = `

@@ -14,7 +14,7 @@ export function Previewer(props:PreviewerTypes) {
 
   return (
     <div style={{padding: "1rem", textAlign:"left","whiteSpace":"pre", ...style}}>
-      {state.str}
+      <div dangerouslySetInnerHTML={{ __html: state.str }}></div>
     </div>
   )
 }
