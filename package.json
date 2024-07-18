@@ -8,6 +8,7 @@
     "dist"
   ],
   "scripts": {
+    "test": "",
     "build": "rimraf dist && npm run pkg:build && npm run local:publish",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "storybook": "storybook dev -p 6006",

@@ -88,7 +88,7 @@ Lets learn to add block quote. Wrapping text into (`).
 ## 7. Images
 Want to show off your cat? No problem! Use the following syntax:
 ```markdown
-![Cute Cat](https://img.freepik.com/premium-photo/closeup-colorful-chameleon-psychedelic-art-with-concept-style-macro-generative-ai_473751-983.jpg)
+![Cute Cat](https://images.pexels.com/photos/1366630/pexels-photo-1366630.jpeg?auto=compress&cs=tinysrgb&w=600)
 ```
 ## 8. Lists
 Create lists with `*` or `-`. Perfect for jotting down your groceries or world domination plans. 📝
