@@ -19,7 +19,8 @@ export function Editor(props: EditorType) {
         setState({ ...state, str: props.value })
     }, [])
 
-    const handleKeyDown = (e) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const handleKeyDown = (e: any) => {
         if (e.ctrlKey && e.key === 'b') {
             e.preventDefault();
             applyFormatting('**');
