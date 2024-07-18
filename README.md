@@ -1,43 +1,4 @@
-
-
-# @sam/md-editor Documentation
-Write Better, Faster, and Smarter with Our Markdown Editor!
-
-Welcome to the official documentation for `@sam/md-editor`! Get ready to experience Markdown editing like never before. Our editor is here to make your life easier, more fun, and a bit spicy!
-
-## Installation
-
-**Step 1:** Open your terminal. You know the drill. 🖥️
-
-**Step 2:** Run the following command to install `@sam/md-editor`:
-
-```bash
-npm install @sam/md-editor
-```
-That's it! You're all set to start using the most epic Markdown editor in the galaxy. 🌌
-
-## Usage
-So, you've installed `@sam/md-editor`. Now what? Let's dive into the awesomeness.
-
-## Import the Editor
-First, you need to import the editor into your React project:
-
-```jsx
-import React from 'react';
-import {Editor} from '@sam/md-editor';
-import './App.css';
-
-const App = () => {
-    return (
-        <Editor >
-            <Editor.Previewer />
-            <Editor.Editor />
-        </Editor>
-    );
-};
-
-export default App;
-```
+# 🚧🚧🚧 Under development 🚧🚧🚧
 
 ## Basic Markdown Syntax
 Here's a rundown of the Markdown syntax you can use with our editor, complete with examples:
