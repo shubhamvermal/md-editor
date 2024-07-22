@@ -1,2 +1,3 @@
 import "./assets/index.css"
-export { MyEditor } from "./editor";
+export { MdPreviewer } from "./editor/md-previewer";
+export { MdEditor } from "./editor";

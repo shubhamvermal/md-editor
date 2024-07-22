@@ -1,45 +1,76 @@
-// const renderMarkdown = (text) => {
-//   const lines = text.split('\n');
-//   return lines.map((line, index) => {
-//       if (line === "") {
-//           return <br />
-//       }
-//       if (line.startsWith('# ')) {
-//           return <h1 key={index}>{line.substring(2)}</h1>;
-//       }
-//       if (line.startsWith('## ')) {
-//           return <h2 key={index}>{line.substring(3)}</h2>;
-//       }
-//       if (line.startsWith('### ')) {
-//           return <h3 key={index}>{line.substring(4)}</h3>;
-//       }
-//       if (line.startsWith('#### ')) {
-//           return <h4 key={index}>{line.substring(5)}</h4>;
-//       }
-//       if (line.startsWith('##### ')) {
-//           return <h5 key={index}>{line.substring(6)}</h5>;
-//       }
-//       if (line.startsWith('###### ')) {
-//           return <h6 key={index}>{line.substring(7)}</h6>;
-//       }
-//       if (line.startsWith('- ')) {
-//           return <ul key={index}><li>{line.substring(2)}</li></ul>;
-//       }
-//       if (line.startsWith('* ')) {
-//           return <ul key={index}><li>{line.substring(2)}</li></ul>;
-//       }
-//       if (/\*\*(.+)\*\*/.test(line)) {
-//           const parts = line.split('**');
-//           return <p key={index}>{parts.map((part, i) => i % 2 === 0 ? part : <strong key={i}>{part}</strong>)}</p>;
-//       }
-//       if (/\*(.+)\*/.test(line)) {
-//           const parts = line.split('*');
-//           return <p key={index}>{parts.map((part, i) => i % 2 === 0 ? part : <em key={i}>{part}</em>)}</p>;
-//       }
-//       if (/\[(.+)\]\((.+)\)/.test(line)) {
-//           const parts = line.match(/\[(.+)\]\((.+)\)/);
-//           return <p key={index}><a href={parts[2]}>{parts[1]}</a></p>;
-//       }
-//       return <p key={index}>{line}</p>;
-//   });
-// };
+export function escapeHtml(str: string) {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+export const renderMarkdown = (text: string) => {
+  // code editor
+  // text = text.replace(/```(.*?)\n([\s\S]*?)```/gim, ' <div class="editor-container">$1<div class="editor" >$2</div></div>');
+  // Replace code blocks with custom HTML structure
+  text = text.replace(
+    /```(.*?)\n([\s\S]*?)```/gim,
+    function (match, lang, code) {
+      return `<div class="editor-container">${lang}<div class="editor">${escapeHtml(code)}</div></div>`;
+    }
+  );
+
+  // Replace headers
+  text = text.replace(/^###### (.*$)/gim, "<h6>$1</h6>");
+  text = text.replace(/^##### (.*$)/gim, "<h5>$1</h5>");
+  text = text.replace(/^#### (.*$)/gim, "<h4>$1</h4>");
+  text = text.replace(/^### (.*$)/gim, "<h3>$1</h3>");
+  text = text.replace(/^## (.*$)/gim, "<h2>$1</h2>");
+  text = text.replace(/^# (.*$)/gim, "<h1>$1</h1>");
+  text = text.replace(/^---(.*$)/gim, "<hr/>");
+
+  // Replace bold text
+  text = text.replace(/\*\*(.*?)\*\*/gim, "<strong>$1</strong>");
+
+  // Replace italic text
+  text = text.replace(/\*(.*?)\*/gim, "<em>$1</em>");
+
+  // image
+  text = text.replace(/!\[(.*?)\]\((.*?)\)/gim, '<img src="$2" alt="$1" />');
+  // Replace links
+  text = text.replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2">$1</a>');
+
+  // block quote
+  text = text.replace(
+    /`([^`]+)`/gim,
+    '<span style="background: #f9d69a; borderRadius: 7px; padding: 0 5px; fontSize: 14px;" >$1</span>'
+  );
+
+  // Replace unordered list items
+  text = text.replace(/^\* (.*$)/gim, "<ul><li>$1</li></ul>");
+  text = text.replace(/^\- (.*$)/gim, "<ul><li>$1</li></ul>");
+
+  // Replace line breaks with <br>
+  text = text.replace(/\n$/gim, "<br>");
+
+  text = text.replace(
+    /((\r?\n){2}|^)(([^\r\n]*\|[^\r\n]*(\r?\n)?)+(?=(\r?\n){2}|$))/gm,
+    (match) => {
+      const [header, ...rows] = match.trim().split("\n");
+      const headers = header
+        .split("|")
+        .map((h) => `<th>${h.trim()}</th>`)
+        .join("");
+      const bodyRows = rows
+        .map((row) => {
+          const cells = row
+            .split("|")
+            .map((cell) => `<td>${cell.trim()}</td>`)
+            .join("");
+          return `<tr>${cells}</tr>`;
+        })
+        .join("");
+      return `<table><thead><tr>${headers}</tr></thead><tbody>${bodyRows}</tbody></table>`;
+    }
+  );
+
+  return text;
+};
