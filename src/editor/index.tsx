@@ -6,7 +6,7 @@ import { Editor } from './editor';
 import { Previewer } from './previewer';
 
 
-type MyEditorType = {
+type MdEditorType = {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     children: any
 }
@@ -17,7 +17,7 @@ const initialState = {
 }
 
 
-export function MyEditor(props: MyEditorType) {
+export function MdEditor(props: MdEditorType) {
     const state = useState(initialState)
     const { children } = props;
     return (
@@ -28,56 +28,6 @@ export function MyEditor(props: MyEditorType) {
 }
 
 
-MyEditor.Options = Options;
-MyEditor.Editor = Editor;
-MyEditor.Previewer = Previewer;
-
-
-// rules
-
-// h1-h6                     |            # Heading
-// bold                      |            **Bold**
-// itelic                    |            _itelic_
-// strike threw              |             -STR-
-// image                     |            img()[]
-// order list                |            1. 
-// unorder list              |            - 
-// code block (bash)         |             ```
-// code highlight            |            ` `
-// blockquote 
-// link                      |            url()[]
-// HR                        |            hr.
-// 
-
-
-// https://kosamari.github.io/sbn/
-
-
-// [ '', ' # Hello *world*', ' ## helo _itelic_', ' *bold*', '' ]
-
-
-// function convertor (item){
-    
-// }
-
-// function separator(str){
-//     return str.split("\n")
-// }
-// function parser(str){
-//     const itemList = separator(str)
-// }
-
-// const str = `
-//  # Hello *world*
-//  ## helo _itelic_
-//  *bold*
-// `
-// parser(str)
-
-
-
-
-// for tokens
-// by line
-// by spaces
-// 
+MdEditor.Options = Options;
+MdEditor.Editor = Editor;
+MdEditor.Previewer = Previewer;
