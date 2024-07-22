@@ -55,11 +55,11 @@ import { MdPreviewer } from '@svpkg/md-editor';
 
 const Previewer = () => {
     return (
-        <MdPreviewer value={} />
+        <MdPreviewer value={""} />
     );
 };
 
-export default App;
+export default Previewer;
 ```
 
 ## Prop Types
